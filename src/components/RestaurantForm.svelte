@@ -15,11 +15,9 @@
 <script>
   import { slide, fade } from "svelte/transition";
   import { db } from "../firebase";
-  export let user;
+  export let user, isOpen = false;
 
   let name = "", menuUrl = "", isSubmitting = false, error = null;
-
-  let showForm = false;
 
   const submitForm = async () => {
     error = null;
@@ -41,7 +39,7 @@
   }
 </script>
 
-{#if showForm}
+{#if isOpen}
 <form on:submit|preventDefault={submitForm} class="box" in:slide out:slide={{duration: 270}}>
   <fieldset disabled={isSubmitting}>
     <h2 class="title is-size-4">Add new restaurant</h2>
@@ -60,7 +58,7 @@
         <button type="submit" class="button is-primary" class:is-loading={isSubmitting} disabled={name === ""}>Submit</button>
       </div>
       <div class="control">
-        <button type="button" class="button is-text" on:click={() => showForm = false}>Cancel</button>
+        <button type="button" class="button is-text" on:click={() => isOpen = false}>Cancel</button>
       </div>
     </div>
     {#if error}
@@ -68,11 +66,4 @@
     {/if}
   </fieldset>
 </form>
-{:else}
-<button type="button" class="button is-medium" on:click={() => showForm = true} in:fade={{delay: 200, duration: 200}}>
-  <div class="icon is-medium">
-    <i class="fas fa-hamburger"></i>
-  </div>
-  <span>Add restaurant</span>
-</button>
 {/if}

@@ -19,6 +19,11 @@
   .level-right > span {
     margin-right: 0.8rem;
   }
+
+  header {
+    padding-bottom: 4vmin;
+    border-bottom: 4px double rgba(0, 0, 0, 0.5);
+  }
 </style>
 
 <header class="level">

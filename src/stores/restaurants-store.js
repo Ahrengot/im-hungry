@@ -3,11 +3,11 @@ import userStore from "./user-store";
 import { db } from "../firebase";
 
 const initialState = {
-  isLoading: true,
+  isLoading: false,
   items: []
 };
 
-const store = readable([], set => {
+const store = readable(initialState, set => {
   let unsubscribe = null;
   
 
@@ -32,10 +32,7 @@ const store = readable([], set => {
         }
       });
     } else {
-      set({
-        isLoading: false,
-        items: [], 
-      });
+      set(initialState);
     }
   });
 
