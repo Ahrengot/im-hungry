@@ -1,6 +1,13 @@
 <script>
-  export let user;
-  console.log("User: ", user);
+  export let user, items = [];
 </script>
 
-<h3>Restaurants List</h3>
+{#if items.length > 1}
+  <ul>
+    <li>Restaurants list not yet implemented</li>
+  </ul>
+{:else}
+  <div class="notification is-info">
+    Uh-ohh! Your restaurants list is empty. Better add some...
+  </div>
+{/if}

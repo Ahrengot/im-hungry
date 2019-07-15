@@ -1,4 +1,5 @@
 <script>
+  import {beforeUpdate, onMount} from "svelte"
   import {fade} from "svelte/transition";
   import "./firebase";
   import user from "./stores/user-store";
@@ -6,24 +7,27 @@
   import GoogleLoginBtn from "./components/GoogleLoginButton";
   import PageTitle from "./components/PageTitle";
   import RestaurantsList from "./components/RestaurantsList";
+  import RestaurantForm from "./components/RestaurantForm";
 
   let isInitializing = true;
   let title = "Loading...";
-  
-  const updateTitle = () => {
+
+  onMount(() => {
+    setTimeout(() => {
+      isInitializing = false;
+    }, 650);
+  })
+
+  beforeUpdate(() => {
     if ($user) {
-      title = "Your Restaurants";
+      title = "Your restaurants";
+    } else if (isInitializing) {
+      title = "Loading..."
     } else {
       title = "Welcome";
     }
-  }
+  });
 
-  setTimeout(() => {
-    updateTitle();
-    isInitializing = false;
-  }, 650);
-
-  user.subscribe(() => updateTitle());
 </script>
 
 <style>
@@ -42,9 +46,10 @@
 <div class="app">
   <PageTitle>{title}</PageTitle>
   {#if !isInitializing}
-    <div transition:fade={{delay: 500}}>
+    <div transition:fade={{duration: 220}}>
       {#if $user}
         <RestaurantsList user={$user} />
+        <RestaurantForm user={$user} />
       {:else}
         <div class="login">
           <GoogleLoginBtn />
