@@ -1,11 +1,19 @@
 <script>
   import user from "../stores/user-store";
-  import { auth } from "../firebase"
+  import { auth } from "../firebase";
 </script>
 
 <style>
   h1.title {
     margin-bottom: 0;
+  }
+
+  @media (max-width: 768px) {
+    .level-right {
+      display: flex;
+      justify-content: flex-start;
+      margin: 0.8rem;
+    }
   }
 
   .level-right > span {

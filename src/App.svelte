@@ -8,9 +8,22 @@
   import RestaurantsList from "./components/RestaurantsList";
 
   let isInitializing = true;
+  let title = "Loading...";
+  
+  const updateTitle = () => {
+    if ($user) {
+      title = "Your Restaurants";
+    } else {
+      title = "Welcome";
+    }
+  }
+
   setTimeout(() => {
+    updateTitle();
     isInitializing = false;
   }, 650);
+
+  user.subscribe(() => updateTitle());
 </script>
 
 <style>
@@ -27,10 +40,8 @@
 </style>
 
 <div class="app">
-  <PageTitle />
-  {#if isInitializing}
-    <div transition:fade>Loading...</div>
-  {:else}
+  <PageTitle>{title}</PageTitle>
+  {#if !isInitializing}
     <div transition:fade={{delay: 500}}>
       {#if $user}
         <RestaurantsList user={$user} />
