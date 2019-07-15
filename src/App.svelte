@@ -5,12 +5,26 @@
   
   import GoogleLoginBtn from "./components/GoogleLoginButton";
   import PageTitle from "./components/PageTitle";
+  import RestaurantsList from "./components/RestaurantsList";
 
   let isInitializing = true;
   setTimeout(() => {
     isInitializing = false;
   }, 650);
 </script>
+
+<style>
+  .login {
+    margin-top: 5vmin;
+    display: flex;
+    align-items: center;
+  }
+
+  .login > p {
+    margin-left: 0.8rem;
+  }
+
+</style>
 
 <div class="app">
   <PageTitle />
@@ -19,11 +33,11 @@
   {:else}
     <div transition:fade={{delay: 500}}>
       {#if $user}
-        <h2>Hello user!</h2>
+        <RestaurantsList user={$user} />
       {:else}
-        <div class="box">
-          <h3>Sign in to access your personalized recommendations</h3>
+        <div class="login">
           <GoogleLoginBtn />
+          <p>Sign in to view restaurants</p>
         </div>
       {/if}
     </div>

@@ -1,10 +1,19 @@
 <script>
   import user from "../stores/user-store";
+  import { auth } from "../firebase"
+
+  const logOut = () => {
+    auth.signOut();
+  }
 </script>
 
 <style>
   h1.title {
     margin-bottom: 0;
+  }
+
+  .level-right > span {
+    margin-right: 0.8rem;
   }
 </style>
 
@@ -14,7 +23,8 @@
   </h1>
   {#if $user}
     <div class="level-right">
-      <button type="button" class="button is-primary is-rounded">
+      <span>Hello, {$user.displayName.split(" ")[0]}!</span>
+      <button type="button" class="button is-primary is-rounded" on:click={logOut}>
         <span>Log out</span>
         <span class="icon is-medium">
           <i class="fas fa-unlock-alt"></i>
