@@ -14,7 +14,6 @@
 
 <script>
   import { slide, fade } from "svelte/transition";
-  import { backOut } from "svelte/easing";
   import { db } from "../firebase";
   export let user;
 
@@ -43,7 +42,7 @@
 </script>
 
 {#if showForm}
-<form on:submit|preventDefault={submitForm} class="box" in:slide={{easing: backOut}} out:slide={{duration: 270}}>
+<form on:submit|preventDefault={submitForm} class="box" in:slide out:slide={{duration: 270}}>
   <fieldset disabled={isSubmitting}>
     <h2 class="title is-size-4">Add new restaurant</h2>
     <div class="field">
