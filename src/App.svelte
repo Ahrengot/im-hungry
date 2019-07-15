@@ -41,6 +41,9 @@
     margin-left: 0.8rem;
   }
 
+  section {
+    padding: 2.5vmin 0;
+  }
 </style>
 
 <div class="app">
@@ -48,8 +51,12 @@
   {#if !isInitializing}
     <div transition:fade={{duration: 220}}>
       {#if $user}
-        <RestaurantsList user={$user} />
-        <RestaurantForm user={$user} />
+        <section>
+          <RestaurantsList user={$user} />
+        </section>
+        <section>
+          <RestaurantForm user={$user} />
+        </section>
       {:else}
         <div class="login">
           <GoogleLoginBtn />
